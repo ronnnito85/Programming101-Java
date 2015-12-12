@@ -7,6 +7,7 @@ public final class Ellipse {
 
 	}
 
+	
 	// constructor with two arguments - numbers, which describe the major axis and the minor axis.
 	//if the points are on the origin, print a message "Points are on the origin."
 	//constructor that makes a copy of an Ellipse
