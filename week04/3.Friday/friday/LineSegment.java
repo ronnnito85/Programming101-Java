@@ -50,7 +50,7 @@ public final class LineSegment {
 	//Override toString(): Line[(x1,y1), (x2,y2)]
 	public String toString(){
 		String result="";
-		result+="[("+start.toString()+","+end.toString()+"]";
+		result+="["+start.toString()+","+end.toString()+"]";
 		return result;
 	}
 	//Override equals()

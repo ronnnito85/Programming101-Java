@@ -10,7 +10,7 @@ public final class Triangle {
 		Triangle copy=new Triangle(triangle);
 		triangle.display3Vertices();
 		triangle.display3Edges();
-		System.out.println("width: "+triangle.base());
+		System.out.println("base: "+triangle.base());
 		System.out.println("height: "+triangle.height());
 		System.out.println("center: "+ triangle.centerOfTriangle());
 		System.out.println("Perimeter: "+triangle.getPerimeter());
@@ -73,6 +73,9 @@ public final class Triangle {
 		return new LineSegment(getC(), getA());
 	}
 	
+	public LineSegment median() {
+		return new LineSegment(getC(), halfBase());
+	}
 	public void display3Edges(){
 		System.out.println("4 edges: "+
 				AB().toString()+", "+
@@ -88,7 +91,12 @@ public final class Triangle {
 	}
 	//method for displaying the center of the triangle
 	public Point centerOfTriangle(){
-		return new Point(); //TODO
+		return new Point(((halfBase().getX() + getC().getX())/3)*2,
+				((halfBase().getY() + getC().getY())/3)*2); //TODO
+	}
+	//help method for calculating center of the triangle
+	private Point halfBase(){
+		return new Point((getA().getX() + getB().getX())/2, (getA().getY() + getB().getY())/2);
 	}
 	//methods getPerimeter(), getArea()
 	public double getPerimeter(){
