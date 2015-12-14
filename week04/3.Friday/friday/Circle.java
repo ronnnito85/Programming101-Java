@@ -1,6 +1,6 @@
 package friday;
 
-public final class Circle {
+public final class Circle implements AreaShape,Center{
 
 	public static void main(String[] args) {
 		Point center=new Point(2,1);
@@ -81,4 +81,8 @@ public final class Circle {
 	    hash = hash * 23 + down().hashCode();
 	    return hash;
 	}
+
+	
+	
+	
 }

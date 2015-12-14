@@ -1,6 +1,6 @@
 package friday;
 
-public final class Triangle {
+public final class Triangle implements AreaShape,Center{
 
 	public static void main(String[] args) {
 		Point a=new Point(1,5);
@@ -12,7 +12,7 @@ public final class Triangle {
 		triangle.display3Edges();
 		System.out.println("base: "+triangle.base());
 		System.out.println("height: "+triangle.height());
-		System.out.println("center: "+ triangle.centerOfTriangle());
+		System.out.println("center: "+ triangle.center());
 		System.out.println("Perimeter: "+triangle.getPerimeter());
 		System.out.println("Area: "+triangle.getArea());
 		System.out.println("Rectangle: "+ triangle.toString());
@@ -90,7 +90,7 @@ public final class Triangle {
 		return (2*getArea())/base();
 	}
 	//method for displaying the center of the triangle
-	public Point centerOfTriangle(){
+	public Point center(){
 		return new Point(((halfBase().getX() + getC().getX())/3)*2,
 				((halfBase().getY() + getC().getY())/3)*2); //TODO
 	}
@@ -103,13 +103,15 @@ public final class Triangle {
 		 return AB().getLength() + BC().getLength() + CA().getLength();
 	}
 	//Heron's Formula
+	@Override
 	public double getArea(){
 		double s=getPerimeter()/2;
 		return Math.sqrt(s*(s-AB().getLength())*(s-BC().getLength())*(s-CA().getLength()));
 	}
 	//Override toString(): Triangle[(x,y), (height,base)]
+	@Override
 	public String toString(){
-		return new String("["+centerOfTriangle().toString()+","+"("+height()+","+base()+")]");
+		return new String("["+center().toString()+","+"("+height()+","+base()+")]");
 	}
 	//Override equals()
 	public boolean equals(Triangle other){
@@ -118,6 +120,7 @@ public final class Triangle {
 			   this.CA().getLength()==other.CA().getLength();
 	}
 	//Override hashCode()
+	@Override
 	public int	hashCode(){
 		int hash = 17;
 	    hash = hash * 23 + getA().hashCode();

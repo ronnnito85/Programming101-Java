@@ -1,6 +1,6 @@
 package friday;
 
-public final class Ellipse {
+public final class Ellipse implements AreaShape,Center{
 
 	public static void main(String[] args) {
 		Point center=new Point(2,1);

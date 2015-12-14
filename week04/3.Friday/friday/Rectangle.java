@@ -1,6 +1,6 @@
 package friday;
 
-public final class Rectangle {
+public final class Rectangle implements AreaShape,Center{
 
 	public static void main(String[] args) {
 		Point upperLeft=new Point(1,5);
@@ -11,7 +11,7 @@ public final class Rectangle {
 		rectangle.display4Edges();
 		System.out.println("width: "+rectangle.width());
 		System.out.println("height: "+rectangle.height());
-		System.out.println("center: "+ rectangle.centerOfRectangle());
+		System.out.println("center: "+ rectangle.center());
 		System.out.println("Perimeter: "+rectangle.getPerimeter());
 		System.out.println("Area: "+rectangle.getArea());
 		System.out.println("Rectangle: "+ rectangle.toString());
@@ -45,8 +45,8 @@ public final class Rectangle {
 
 	//find upper right point- x= center.X + halfDiagonal.Y; y=center.Y - halfDiagonal.X
 	public Point getUpperRight() {
-		return new Point(centerOfRectangle().getX() + halfDiagonal().getY(),
-				centerOfRectangle().getY() - halfDiagonal().getX());
+		return new Point(center().getX() + halfDiagonal().getY(),
+				center().getY() - halfDiagonal().getX());
 	}
 
 	public Point getLowerRight() {
@@ -55,8 +55,8 @@ public final class Rectangle {
 
 	//find lower left t point- x= center.X - halfDiagonal.Y; y=center.Y + halfDiagonal.X
 	public Point getLowerLeft() {
-		return new Point(centerOfRectangle().getX() - halfDiagonal().getY(),
-						centerOfRectangle().getY() + halfDiagonal().getX());
+		return new Point(center().getX() - halfDiagonal().getY(),
+						center().getY() + halfDiagonal().getX());
 	}
 	
 	public void display4Vertices(){
@@ -102,45 +102,50 @@ public final class Rectangle {
 	}
 	
 	//method for displaying the center of the rectangle
-	public Point centerOfRectangle(){
+	public Point center(){
 		return new Point((getUpperLeft().getX() + getLowerRight().getX()) /2, 
 				         (getUpperLeft().getY() + getLowerRight().getY()) /2);
 	}
 	
 	//help method for calculating the other two vertices
-	public Point halfDiagonal(){
+	private Point halfDiagonal(){
 		return new Point((getUpperLeft().getX() - getLowerRight().getX()) /2, 
 				         (getUpperLeft().getY() - getLowerRight().getY()) /2);
 	} 
 	
 	//methods getPerimeter(), getArea()
+	@Override
 	public double getPerimeter(){
 		return 2*width() + 2*height();
 	}
-	
+	@Override
 	public double getArea(){
 		return width() * height();
 	}
 	
 	//Override toString(): Rectangle[(x,y), (height,width)]
+	@Override
 	public String toString(){
-		return new String("[("+centerOfRectangle().toString()+", ("+height()+","+width()+")]");
+		return new String("[("+center().toString()+", ("+height()+","+width()+")]");
 	
 	}
 	
 	//Override equals()
 	public boolean equals(Rectangle other){
-		return this.centerOfRectangle().equals(other.centerOfRectangle()) && 
+		return this.center().equals(other.center()) && 
 			   this.width()==other.width() &&
 			   this.height()==other.height();
 	}
 	
 	//Override hashCode()
+	@Override
 	public int	hashCode(){
 		int hash = 17;
 	    hash = hash * 23 + getUp().hashCode();
 	    hash = hash * 23 + getLeft().hashCode();
 	    return hash;
 	}
+	
+	
 	
 }
